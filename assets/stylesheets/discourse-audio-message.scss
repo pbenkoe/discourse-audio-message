@@ -1,0 +1,45 @@
+.audio-message-controls {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.record-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elapsed-time {
+  font-size: 20px !important;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.record-action {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+.record-action .icon {
+  height: 50px;
+}
+
+.record-action:focus .icon {
+  fill: darkred;
+}
+
+.audio-message-controls .record-action .icon {
+  fill: red;
+}
+
+.record-action.attach .icon {
+  fill: #2596be;
+}

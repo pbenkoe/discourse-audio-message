@@ -1,0 +1,5 @@
+en:
+  js:
+    audio_message:
+      modal:
+        title: "Record Audio"

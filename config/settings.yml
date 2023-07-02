@@ -1,0 +1,4 @@
+plugins:
+  audio_message_enabled:
+    default: true
+    client: true
