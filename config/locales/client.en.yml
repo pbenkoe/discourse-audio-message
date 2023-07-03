@@ -2,4 +2,6 @@ en:
   js:
     audio_message:
       modal:
-        title: "Record Audio"
+        title: "Click to record"
+    composer:
+      audio-message_title: "Record audio"
