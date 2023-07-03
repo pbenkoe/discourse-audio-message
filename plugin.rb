@@ -1,6 +1,6 @@
 # name: discourse-audio-message
 # about: A discourse plugin that allows users to attach audio messages to their posts
-# version: 0.1
+# version: 0.1.1
 # authors: Peter Be
 # url: https://github.com/pbenkoe/discourse-audio-message
 
