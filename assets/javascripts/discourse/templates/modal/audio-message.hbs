@@ -27,6 +27,8 @@
 {{/d-modal-body}}
 
 {{#if uploading}}
-  <div class="spinner"></div>
-  <p>Uploading... {{uploadProgress}}%</p>
+  <div class="uploading-text">
+    <div class="spinner"></div>
+    <p>Uploading... {{uploadProgress}}%</p>
+  </div>
 {{/if}}
