@@ -119,6 +119,14 @@ export default Controller.extend(ModalFunctionality, {
     }
   },
 
+  onClose() {
+    if (this.isRecording) {
+      this.stopRecording();
+      this.reset();
+      this._super();
+    }
+  },
+
   reset() {
     URL.revokeObjectURL(this.audioUrl);
     this.setProperties({
