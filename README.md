@@ -18,7 +18,6 @@ hooks:
     - exec:
         cd: $home/plugins
         cmd:
-          - mkdir -p plugins
           - git clone https://github.com/discourse/docker_manager.git
           - git clone https://github.com/pbenkoe/discourse-audio-message.git
 ```
@@ -27,9 +26,10 @@ hooks:
 
 ```
 cd /var/discourse
-git pull
 ./launcher rebuild app
 ```
+
+You can also check out the [Official Discourse Documentation](https://meta.discourse.org/t/install-plugins-in-discourse/19157) on how to install plugins.
 
 ## Known Issues
 
