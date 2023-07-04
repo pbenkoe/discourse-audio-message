@@ -1,7 +1,8 @@
 {{#d-modal-body}}
-  <h2>{{i18n "audio_message.modal.title"}}</h2>
+  <h2>{{i18n "audio_message.modal.title-start"}}</h2>
   <div class="audio-message-controls">
     {{#if isRecording}}
+    <h2>{{i18n "audio_message.modal.title-stop"}}</h2>
       <div class="record-section">
         <p class="elapsed-time">{{elapsedTime}}</p>
         <button class="record-action" {{action "stopRecording"}}>
@@ -9,6 +10,7 @@
         </button>
       </div>
     {{else if hasRecording}}
+    <h2>{{i18n "audio_message.modal.title-review"}}</h2>
       <p><audio controls src="{{audioUrl}}">Your browser does not support the audio element.</audio></p>
       <div class="action-buttons">
         <button class="record-action" {{action "discardRecording"}}>
