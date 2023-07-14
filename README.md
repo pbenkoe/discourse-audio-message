@@ -6,7 +6,7 @@ A discourse plugin that allows users to directly record and attach audio message
 
 ### IMPORTANT
 - Add `blob:` to the content security policy script src in your Discourse admin settings
-- Add `mp4` to the authorized extensions list in your Discourse admin settings
+- Add `mp3` to the authorized extensions list in your Discourse admin settings
 
 The plugin adds a microphone button to the post composer UI, through which an audio message can be recorded and attached to the post.
 
@@ -40,8 +40,6 @@ Once the audio is uploaded and attached to the post, the _preview_ might not be 
 ## Disclaimer
 
 This plugin was developed with the help of ChatGPT. I don't have a background in Javascript development, and finding documentation about plugin development for Discourse that goes beyond a basic setup, was rather difficult to find. I'm not sure if best practices are followed here, but the code base might serve as a rudimentary foundation to build upon.
-
-The plugin currently uses the MediaRecorder API, recording in the `mp4` format, which seemed to be a good solution, supporting most modern web browsers, but I'm happy to receive feedback or pull requests, if there are better ways to implement this.
 
 ## License
 
