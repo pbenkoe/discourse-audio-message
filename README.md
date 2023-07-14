@@ -4,7 +4,9 @@ A discourse plugin that allows users to directly record and attach audio message
 
 ## Usage
 
-Make sure to add `mp4` to the authorized extensions list in your Discourse admin settings.
+### IMPORTANT
+- Add `blob:` to the content security policy script src in your Discourse admin settings
+- Add `mp4` to the authorized extensions list in your Discourse admin settings
 
 The plugin adds a microphone button to the post composer UI, through which an audio message can be recorded and attached to the post.
 

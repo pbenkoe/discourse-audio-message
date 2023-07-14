@@ -5,48 +5,64 @@ import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import getUrl from "discourse-common/lib/get-url";
 import { getOwner } from "discourse-common/lib/get-owner";
+import loadScript from "discourse/lib/load-script";
 
 export default Controller.extend(ModalFunctionality, {
   isRecording: false,
   hasRecording: false,
   audioData: null,
-  mediaRecorder: null,
+  audioRecorder: null,
   elapsedTime: "0:00",
   startTime: null,
   audioUrl: null,
   uploading: false,
   uploadProgress: 0,
 
-  @action
-  startRecording() {
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-      const mimeType = 'audio/mp4';
-      let audioChunks = [];
-      this.mediaRecorder = new MediaRecorder(stream, { type: mimeType });
+  init() {
+    this._super(...arguments);
 
-      this.mediaRecorder.addEventListener("dataavailable", event => {
-        audioChunks.push(event.data);
-      });
-
-      this.mediaRecorder.addEventListener("stop", () => {
-        this.audioData = new Blob(audioChunks, { type: mimeType });
-        this.audioUrl = URL.createObjectURL(this.audioData);
-        this.set('hasRecording', true);
-        this.set('isRecording', false);
-      });
-
-      this.mediaRecorder.start();
-      this.set('isRecording', true);
-      this.set('startTime', Date.now());
-      this.timer = setInterval(() => this.updateElapsedTime(), 1000);
+    Promise.all([
+      loadScript(
+        "/plugins/discourse-audio-message/javascripts/audiorecorder.js"
+      ),
+      loadScript(
+        "/plugins/discourse-audio-message/javascripts/mp3worker.js"
+      )
+    ]).then(() => {
+      AudioRecorder.preload("/plugins/discourse-audio-message/javascripts/mp3worker.js");
     });
   },
 
   @action
+  startRecording() {
+    this.audioRecorder = new AudioRecorder({encoderBitRate : 128, streaming : true});
+    const mimeType = 'audio/mp3';
+    let audioChunks = [];
+
+    this.audioRecorder.onstart = () => {
+      this.set('isRecording', true);
+      this.set('startTime', Date.now());
+      this.timer = setInterval(() => this.updateElapsedTime(), 1000);
+    };
+
+    this.audioRecorder.ondataavailable = (data) => {
+      audioChunks.push(data);
+    };
+
+    this.audioRecorder.onstop = () => {
+      this.audioData = new Blob(audioChunks, { type: mimeType });
+      this.audioUrl = URL.createObjectURL(this.audioData);
+      this.set('hasRecording', true);
+      this.set('isRecording', false);
+    };
+    
+    this.audioRecorder.start();
+  },
+
+  @action
   stopRecording() {
-    if (this.mediaRecorder) {
-      this.mediaRecorder.stop();
-      this.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    if (this.audioRecorder) {
+      this.audioRecorder.stop();
       this.set('isRecording', false);
       clearInterval(this.timer);
     }
@@ -74,7 +90,7 @@ export default Controller.extend(ModalFunctionality, {
   @action
   attachAudioToPost() {
     if (this.audioData) {
-      let file = new File([this.audioData], 'recording.mp4', { type: 'audio/mp4' });
+      let file = new File([this.audioData], 'recording.mp3', { type: 'audio/mp3' });
 
       const uppy = new Uppy({
         debug: true,
@@ -133,7 +149,7 @@ export default Controller.extend(ModalFunctionality, {
       isRecording: false,
       hasRecording: false,
       audioData: null,
-      mediaRecorder: null,
+      audioRecorder: null,
       elapsedTime: "0:00",
       startTime: null,
       audioUrl: null,
