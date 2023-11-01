@@ -7,7 +7,6 @@ A discourse plugin that allows users to directly record and attach audio message
 ### IMPORTANT
 - Add `blob:` to the content security policy script src in your Discourse admin settings
 - Add `mp3` to the authorized extensions list in your Discourse admin settings
-- Disable Content Security Policy (CSP) in your Site Settings
 
 The plugin adds a microphone button to the post composer UI, through which an audio message can be recorded and attached to the post.
 
