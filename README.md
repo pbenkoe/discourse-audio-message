@@ -1,6 +1,6 @@
 # discourse-audio-message
 
-A discourse plugin that allows users to directly record and attach audio messages to their posts.
+A discourse plugin that allows users to directly record and attach audio messages to their posts from within the composer. In addition to a button (microphone) in the composer, the keyboard shortcut **Ctrl+r** also initiates the recording function.
 
 ## Usage
 
