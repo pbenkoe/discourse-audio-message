@@ -19,6 +19,7 @@ function initializeWithApi(api) {
         id: 'audio-message',
         group: 'extras',
         icon: 'microphone',
+        shortcut: 'R',
         sendAction: () => tb.context.send('openAudioMessageModal')
       })
     });
